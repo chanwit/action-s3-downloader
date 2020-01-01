@@ -1,0 +1,26 @@
+# action.yml
+name: 'S3 Downloader'
+description: 'S3 Downloader with MinIO Client (mc)'
+inputs:
+  awsAccessKeyId:
+    description: 'awsAccessKeyId'
+    required: true
+  awsSecretAccessKey:
+    description: 'awsSecretAccessKey'
+    required: true
+  s3Endpoint:
+    description: 'AWS S3 Endpoint'
+    required: true
+    default: 'us-west-1'
+  s3BucketAndFile:
+    description: 'Bucket and File Location'
+    required: true
+outputs: {}
+runs:
+  using: 'docker'
+  image: Dockerfile # docker://chanwit
+  env:
+    AWS_ACCESS_KEY_ID: ${{ inputs.awsAccessKeyId }}
+    AWS_SECRET_ACCESS_KEY: ${{ inputs.awsSecretAccessKey }}
+    S3_ENDPOINT: ${{ inputs.s3Endpoint }}
+    S3_BUCKET_AND_FILE : ${{ inputs.s3BucketAndFile }}
